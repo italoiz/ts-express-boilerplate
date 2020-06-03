@@ -1,5 +1,5 @@
-import '@shared/providers';
 import '@config/env';
+import '@shared/providers';
 
 import debug from '@utils/debug';
 

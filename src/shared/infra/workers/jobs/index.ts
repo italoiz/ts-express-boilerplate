@@ -47,7 +47,9 @@ class JobWorker {
           return resolveModule(this.jobProvider);
         }
 
-        throw new Error('Job module is not a function.');
+        throw new Error(
+          `The job module "${modulePath}" has no exported a function.`,
+        );
       });
 
     await Promise.all(modules);

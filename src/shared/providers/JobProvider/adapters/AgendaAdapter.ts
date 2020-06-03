@@ -11,7 +11,7 @@ export class AgendaJobProviderAdapter implements JobProviderInterface {
     this.agenda = new Agenda(AgendaConfig);
   }
 
-  getJob<T = any>(job: Agenda.Job<T>): JobInterface<T> {
+  transformJob<T = any>(job: Agenda.Job<T>): JobInterface<T> {
     return {
       id: job.attrs._id.toHexString(),
       data: job.attrs.data,
@@ -22,21 +22,15 @@ export class AgendaJobProviderAdapter implements JobProviderInterface {
   getJobHandler<T = any>(
     jobHandler: JobHandler<T>,
   ): (job: Agenda.Job<T>, done: (err?: Error) => void) => void | Promise<void> {
-    const handler = (
-      job: Agenda.Job<T>,
-      ...args: any[]
-    ): void | Promise<void> => {
-      return jobHandler(this.getJob(job), ...args);
-    };
-
-    return handler;
+    return (job: Agenda.Job<T>, ...args: any[]): void | Promise<void> =>
+      jobHandler(this.transformJob(job), ...args);
   }
 
-  async process<T = any>(
+  process<T = any>(
     jobName: string,
     data?: T | undefined,
   ): Promise<JobInterface<T>> {
-    return this.agenda.now(jobName, data).then(this.getJob.bind(this));
+    return this.agenda.now(jobName, data).then(this.transformJob.bind(this));
   }
 
   processAt<T = any>(
@@ -46,7 +40,7 @@ export class AgendaJobProviderAdapter implements JobProviderInterface {
   ): Promise<JobInterface<T>> {
     return this.agenda
       .schedule<T>(date, jobName, data)
-      .then(this.getJob.bind(this));
+      .then(this.transformJob.bind(this));
   }
 
   start(): Promise<void> {
