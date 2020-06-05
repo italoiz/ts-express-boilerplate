@@ -5,6 +5,7 @@
       "@config/*": ["src/config/*"],
       "@modules/*": ["src/modules/*"],
       "@utils/*": ["src/shared/utils/*"],
+      "@providers/*": ["src/shared/providers/*"],
       "@shared/*": ["src/shared/*"],
       "@app/*": ["src/*"]
     }

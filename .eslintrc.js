@@ -46,7 +46,6 @@ module.exports = {
         groups: [
           ['absolute'],
           ['module'],
-          ['/^@typings/'],
           ['/^@/'],
           ['parent', 'sibling', 'index'],
         ],
