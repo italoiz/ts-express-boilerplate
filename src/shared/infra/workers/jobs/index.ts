@@ -29,10 +29,10 @@ class JobQueue {
       .map(path => path.replace('src/modules/', '@modules/'))
       .map(path => ({
         modulePath: path.replace('@modules/', ''),
-        module: import(path).then(m => m.default),
+        module: import(path),
       }))
       .map(async ({ module, modulePath }) => {
-        const resolveModule = await module;
+        const resolveModule = (await module).default;
 
         if (typeof resolveModule === 'function') {
           debug(

@@ -1,3 +1,9 @@
+/**
+ * !!! DON'T CHANGE THIS FILE IF YOU DON'T KNOW ARE DOING !!!
+ *
+ * The function of this file is to register all providers from the application for the Dependency Injection (DI)
+ * works correctly.
+ */
 import glob from 'glob';
 
 import debug from '@utils/debug';

@@ -5,7 +5,7 @@ import debug from '@utils/debug';
 
 import connectDatabase from '../typeorm';
 import debugRequestMiddleware from './middlewares/debug-request';
-import routes from './routes';
+import registerRoutes from './routes';
 
 class App {
   public readonly server: express.Express;
@@ -19,7 +19,7 @@ class App {
     debug('app', 'Bootstraping application');
 
     this.middlewares();
-    this.routes();
+    await this.routes();
   }
 
   middlewares(): void {
@@ -31,10 +31,10 @@ class App {
     this.server.use(debugRequestMiddleware);
   }
 
-  routes(): void {
-    debug('app', 'Configure routing');
-
-    this.server.use(routes);
+  routes(): Promise<void> {
+    return registerRoutes(this.server).then(() => {
+      debug('app:routes', 'Routes registered');
+    });
   }
 
   async start(port: number): Promise<void> {
