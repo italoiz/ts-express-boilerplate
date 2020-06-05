@@ -1,20 +1,17 @@
-import '@config/env';
-import '@shared/providers';
-
 import glob from 'glob';
-import { container } from 'tsyringe';
+import { injectable, inject } from 'tsyringe';
 
 import { JobProviderInterface } from '@shared/providers/JobProvider/interface';
 import debug from '@utils/debug';
 
-class JobWorker {
-  public jobProvider: JobProviderInterface;
-
+@injectable()
+class JobQueue {
   private debugPrefix = 'worker:jobs';
 
-  constructor() {
-    this.jobProvider = container.resolve<JobProviderInterface>('JobProvider');
-  }
+  constructor(
+    @inject('JobProvider')
+    private jobProvider: JobProviderInterface,
+  ) {}
 
   private debug(message: string, ...args: any[]): void {
     debug(this.debugPrefix, message, ...args);
@@ -68,4 +65,4 @@ class JobWorker {
   }
 }
 
-export default new JobWorker();
+export default JobQueue;

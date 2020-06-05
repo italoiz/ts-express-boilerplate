@@ -1,3 +1,12 @@
-import JobWorker from './index';
+import 'reflect-metadata';
+import '@config/env';
+import { container } from 'tsyringe';
 
-JobWorker.start();
+import registerProviders from '@shared/providers';
+
+import JobQueue from './index';
+
+registerProviders().then(() => {
+  const jobQueue = container.resolve(JobQueue);
+  jobQueue.start();
+});

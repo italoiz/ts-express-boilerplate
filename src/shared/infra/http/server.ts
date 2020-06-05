@@ -1,12 +1,13 @@
+import 'reflect-metadata';
 import '@config/env';
-import '@shared/providers';
 
-import debug from '@utils/debug';
+import registerProviders from '@shared/providers';
 
-import app from './app';
+import App from './app';
 
 const PORT: number = Number(process.env.PORT) || 3333;
 
-app.listen(PORT, () => {
-  debug('server', '⚡️ Server is running on port %d', PORT);
+registerProviders().then(() => {
+  const app = new App();
+  app.start(PORT);
 });

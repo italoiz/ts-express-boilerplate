@@ -1,4 +1,3 @@
-import 'reflect-metadata';
 import glob from 'glob';
 
 import debug from '@utils/debug';
@@ -27,4 +26,4 @@ const registerProviders = async (): Promise<void> => {
   await Promise.all(modules);
 };
 
-registerProviders();
+export default registerProviders;

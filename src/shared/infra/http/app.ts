@@ -11,8 +11,10 @@ class App {
   server: express.Express;
 
   constructor() {
-    connectDatabase();
+    this.bootstrap();
+  }
 
+  private async bootstrap(): Promise<void> {
     this.server = express();
 
     debug('app', 'Bootstraping application');
@@ -35,6 +37,13 @@ class App {
 
     this.server.use(routes);
   }
+
+  async start(port: number): Promise<void> {
+    await connectDatabase();
+    this.server.listen(port, () => {
+      debug('server', '⚡️ Server is running on port %d', port);
+    });
+  }
 }
 
-export default new App().server;
+export default App;
