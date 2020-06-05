@@ -21,6 +21,7 @@ Check the list of environment variables and what each one means in the applicati
 | **DB_PASS**               | Password of database used                                                                               |
 | **DB_NAME**               | Database name passed to Sequelize options                                                               |
 | **DB_HOST**               | Database host passed to Sequelize options                                                               |
+| **API_PREFIX**            | The API prefix to use on all registered routes. Default prefix is `/api`.                               |
 
 ### Licence
 
