@@ -8,15 +8,14 @@ import debugRequestMiddleware from './middlewares/debug-request';
 import routes from './routes';
 
 class App {
-  server: express.Express;
+  public readonly server: express.Express;
 
   constructor() {
+    this.server = express();
     this.bootstrap();
   }
 
   private async bootstrap(): Promise<void> {
-    this.server = express();
-
     debug('app', 'Bootstraping application');
 
     this.middlewares();
@@ -46,4 +45,4 @@ class App {
   }
 }
 
-export default App;
+export default new App();
