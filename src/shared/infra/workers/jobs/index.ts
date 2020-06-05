@@ -1,7 +1,7 @@
 import glob from 'glob';
 import { injectable, inject } from 'tsyringe';
 
-import { JobProviderInterface } from '@shared/providers/JobProvider/interface';
+import { JobProvider } from '@shared/providers/JobProvider/interface';
 import debug from '@utils/debug';
 
 @injectable()
@@ -10,7 +10,7 @@ class JobQueue {
 
   constructor(
     @inject('JobProvider')
-    private jobProvider: JobProviderInterface,
+    private jobProvider: JobProvider,
   ) {}
 
   private debug(message: string, ...args: any[]): void {
