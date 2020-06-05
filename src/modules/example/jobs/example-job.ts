@@ -1,11 +1,11 @@
-import { JobProviderInterface } from '@shared/providers/JobProvider/interface';
+import { JobProvider } from '@shared/providers/JobProvider/interface';
 
 interface ExampleJobInterface {
   title: string;
   description: string;
 }
 
-export default (jobProvider: JobProviderInterface): void | Promise<void> => {
+export default (jobProvider: JobProvider): void | Promise<void> => {
   /**
    * Create a worker with name "task_name", when use methods `process`, `processAt`
    * passing "task_name" on the `jobName` param, this handler will be called.

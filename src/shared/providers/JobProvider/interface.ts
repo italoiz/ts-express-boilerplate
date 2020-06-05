@@ -1,21 +1,21 @@
-export interface JobInterface<T> {
+export interface Job<T> {
   id: number | string;
   data: T;
   cancel: () => Promise<void>;
 }
 
 export interface JobHandler<T = any> {
-  (job: JobInterface<T>, done?: (err?: Error) => void): void | Promise<void>;
+  (job: Job<T>, done?: (err?: Error) => void): void | Promise<void>;
 }
 
-export interface JobProviderInterface {
+export interface JobProvider {
   /**
    * Create a job to run once immediately.
    *
    * @param jobName Job name.
    * @param data Custom data to process job.
    */
-  process<T>(jobName: string, data?: T): Promise<JobInterface<T>>;
+  process<T>(jobName: string, data?: T): Promise<Job<T>>;
 
   /**
    * Create a job to run once in specified `date`.
@@ -28,7 +28,7 @@ export interface JobProviderInterface {
     jobName: string,
     date: string | Date,
     data?: T,
-  ): Promise<JobInterface<T>>;
+  ): Promise<Job<T>>;
 
   /**
    * Starts the job queue processing.
@@ -40,7 +40,7 @@ export interface JobProviderInterface {
    *
    * @param job Job object from library.
    */
-  transformJob<T = any>(job: any): JobInterface<T>;
+  transformJob<T = any>(job: any): Job<T>;
 
   /**
    * Transform from interface `JobProvider` handler for the library handler.

@@ -2,16 +2,16 @@ import Agenda from 'agenda';
 
 import AgendaConfig from '@config/agenda';
 
-import { JobProviderInterface, JobInterface, JobHandler } from '../interface';
+import { JobProvider, Job, JobHandler } from '../interface';
 
-export class AgendaJobProviderAdapter implements JobProviderInterface {
+export class AgendaJobProvider implements JobProvider {
   public readonly agenda: Agenda;
 
   constructor() {
     this.agenda = new Agenda(AgendaConfig);
   }
 
-  transformJob<T = any>(job: Agenda.Job<T>): JobInterface<T> {
+  transformJob<T = any>(job: Agenda.Job<T>): Job<T> {
     return {
       id: job.attrs._id.toHexString(),
       data: job.attrs.data,
@@ -26,10 +26,7 @@ export class AgendaJobProviderAdapter implements JobProviderInterface {
       jobHandler(this.transformJob(job), ...args);
   }
 
-  process<T = any>(
-    jobName: string,
-    data?: T | undefined,
-  ): Promise<JobInterface<T>> {
+  process<T = any>(jobName: string, data?: T | undefined): Promise<Job<T>> {
     return this.agenda.now(jobName, data).then(this.transformJob.bind(this));
   }
 
@@ -37,7 +34,7 @@ export class AgendaJobProviderAdapter implements JobProviderInterface {
     jobName: string,
     date: string | Date,
     data?: T | undefined,
-  ): Promise<JobInterface<T>> {
+  ): Promise<Job<T>> {
     return this.agenda
       .schedule<T>(date, jobName, data)
       .then(this.transformJob.bind(this));
