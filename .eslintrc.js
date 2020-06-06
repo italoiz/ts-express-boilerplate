@@ -54,6 +54,12 @@ module.exports = {
     ],
     '@typescript-eslint/no-explicit-any': 'off',
     'no-useless-constructor': 'off',
+    '@typescript-eslint/no-unused-vars': [
+      'error',
+      {
+        argsIgnorePattern: '_',
+      },
+    ],
   },
   settings: {
     'import/extensions': ['.ts', '.js'],

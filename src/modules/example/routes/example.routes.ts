@@ -1,5 +1,6 @@
 import express from 'express';
 
+import { ForbiddenException } from '@shared/exceptions';
 import { AppRoute } from '@shared/interfaces/routes';
 
 export default (): AppRoute<express.Router> => {
@@ -19,7 +20,7 @@ export default (): AppRoute<express.Router> => {
    */
   router.use((req, res, next) => {
     if (!req.query.auth) {
-      return res.status(400).send();
+      throw new ForbiddenException('Forbidden Access');
     }
     return next();
   });

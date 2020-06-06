@@ -1,10 +1,12 @@
 import cors from 'cors';
 import express from 'express';
+import 'express-async-errors';
 
 import debug from '@utils/debug';
 
 import connectDatabase from '../typeorm';
 import debugRequestMiddleware from './middlewares/debug-request';
+import exceptionHandlerMiddleware from './middlewares/exception-handler';
 import registerRoutes from './routes';
 
 class App {
@@ -20,6 +22,7 @@ class App {
 
     this.middlewares();
     await this.routes();
+    this.exceptionHandler();
   }
 
   middlewares(): void {
@@ -35,6 +38,10 @@ class App {
     return registerRoutes(this.server).then(() => {
       debug('app:routes', 'Routes registered');
     });
+  }
+
+  private exceptionHandler(): void {
+    this.server.use(exceptionHandlerMiddleware);
   }
 
   async start(port: number): Promise<void> {
