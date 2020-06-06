@@ -1,4 +1,4 @@
-require('@config/env');
+import '@config/env';
 
 const { DB_TYPE, DB_USER, DB_PASS, DB_NAME, DB_HOST } = process.env;
 
@@ -9,7 +9,7 @@ module.exports = [
     host: DB_HOST,
     username: DB_USER,
     password: DB_PASS,
-    database: DB_TYPE === 'sqlite' ? 'src/db.sqlite' : DB_NAME,
+    database: DB_NAME,
     entities: ['src/modules/**/infra/typeorm/entities/*.ts'],
     migrations: ['src/shared/infra/typeorm/migrations/*.ts'],
     cli: {

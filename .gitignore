@@ -106,6 +106,7 @@ temp/
 
 # Tests
 db.sqlite
+*.sqlite
 
 ### macOS ###
 # General

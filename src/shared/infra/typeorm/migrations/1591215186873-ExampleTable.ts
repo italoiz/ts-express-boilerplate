@@ -8,7 +8,7 @@ export class ExampleTable1591215186873 implements MigrationInterface {
         columns: [
           {
             name: 'id',
-            type: 'int',
+            type: 'integer',
             isPrimary: true,
             isNullable: false,
             isGenerated: true,

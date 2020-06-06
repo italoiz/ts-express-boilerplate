@@ -9,7 +9,7 @@ module.exports = {
   collectCoverage: true,
   collectCoverageFrom: ['<rootDir>/src/**/*.{ts,js}'],
   coverageDirectory: '<rootDir>/coverage',
-  coverageReporters: ['json', 'lcov'],
+  coverageReporters: ['json', 'lcov', 'text-summary'],
   testEnvironment: 'node',
   testMatch: ['<rootDir>/src/**/*.(spec|test).{js,ts}'],
   preset: 'ts-jest',
