@@ -7,14 +7,11 @@ module.exports = {
   browser: false,
   clearMocks: true,
   collectCoverage: true,
-  collectCoverageFrom: [
-    '<rootDir>/src/**/*.{ts,js}',
-    '!<rootDir>/src/server.ts',
-  ],
-  coverageDirectory: '<rootDir>/__tests__/coverage',
+  collectCoverageFrom: ['<rootDir>/src/**/*.{ts,js}'],
+  coverageDirectory: '<rootDir>/coverage',
   coverageReporters: ['json', 'lcov'],
   testEnvironment: 'node',
-  testMatch: ['<rootDir>/__tests__/**/*.(spec|test).{js,ts}'],
+  testMatch: ['<rootDir>/src/**/*.(spec|test).{js,ts}'],
   preset: 'ts-jest',
   transform: {
     '^.+\\.(ts|tsx)$': 'ts-jest',

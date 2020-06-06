@@ -9,7 +9,7 @@ module.exports = [
     host: DB_HOST,
     username: DB_USER,
     password: DB_PASS,
-    database: DB_TYPE === 'sqlite' ? '__tests__/db.sqlite' : DB_NAME,
+    database: DB_TYPE === 'sqlite' ? 'src/db.sqlite' : DB_NAME,
     entities: ['src/modules/**/infra/typeorm/entities/*.ts'],
     migrations: ['src/shared/infra/typeorm/migrations/*.ts'],
     cli: {

@@ -105,4 +105,4 @@ tmp/
 temp/
 
 # Tests
-__tests__/db.sqlite
+db.sqlite
